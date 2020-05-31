@@ -19,11 +19,7 @@ export default {
   },
   components: {
     Comment
-  },
-  data() {
-    return {};
-  },
-  methods: {}
+  }
 };
 </script>
 <style>
