@@ -1,28 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <thread v-for="thread in threads" :key="thread.id" class="thread" :thread="thread"></thread>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Thread from "./components/thread.component";
+import ThreadApiService from "./api.services/thread.api.service";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Thread
+  },
+  data() {
+    return {
+      threads: []
+    };
+  },
+  mounted: function() {
+    ThreadApiService.getThreads().then(response => {
+      this.threads = response.data;
+    });
   }
-}
+};
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.thread {
+  border: 1px solid #000;
 }
 </style>
